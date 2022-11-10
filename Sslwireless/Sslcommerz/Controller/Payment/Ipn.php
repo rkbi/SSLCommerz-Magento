@@ -39,11 +39,7 @@ class Ipn extends \Magento\Framework\App\Action\Action
             $data = $this->getRequest()->getPostValue();
             $resp = $paymentMethod->ipnAction($data);
             
-            $ipn_log = fopen("SSLCOM_IPN_LOG.txt", "a+") or die("Unable to open file!");
-            $ipn_result = array('Transaction ID:' => $data['tran_id'],'Date Time:' => $data['tran_date'],'Val ID:' => isset($data['val_id']) ? $data['val_id'] : '','Amount:' => $data['amount'],'Card Type:' => $data['card_type'],'Card Type:' => $data['card_type'],'Currency:' => $data['currency'],'Card Issuer:' => $data['card_issuer'],'Store ID:' => $data['store_id'],'Status:' => $data['status'],'IPN Response:'=>$resp);
-
-            fwrite($ipn_log, json_encode($ipn_result).PHP_EOL);
-            fclose($ipn_log);
+            echo $resp;
         }
         else
         {
